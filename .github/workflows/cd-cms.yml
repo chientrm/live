@@ -3,6 +3,9 @@ name: cd cms
 on:
   push:
     branches: [main]
+    paths:
+      - "cms/**"
+      - .github/workflows/cd-cms.yml
 
 jobs:
   cd:
