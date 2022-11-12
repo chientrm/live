@@ -12,7 +12,7 @@ jobs:
       - run: cp -R cms /tmp/cms
       - run: rm -rf *
       - run: cp -R /tmp/cms/* ./
-      - run: ls -al
+      - run: echo "${{ secrets.ENV }}" > .env
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
