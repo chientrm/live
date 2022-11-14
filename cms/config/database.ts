@@ -1,12 +1,11 @@
+import os from "os";
+
+const homedir = os.homedir();
+
 export default () => ({
   connection: {
-    client: "mysql",
-    connection: {
-      port: 3306,
-      database: "live",
-      user: "live",
-      password: "",
-      ssl: false,
-    },
+    client: "sqlite",
+    connection: { filename: `${homedir}/live.db` },
+    useNullAsDefault: true,
   },
 });
