@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.postcss';
 	import Button from '$lib/components/Button.svelte';
 	import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
 </script>

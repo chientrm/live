@@ -8,6 +8,7 @@
 	{value}
 	class:primary={variant === 'primary'}
 	class:secondary={variant === 'secondary'}
+	class="bg-blue-300"
 />
 
 <style>
