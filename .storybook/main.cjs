@@ -1,5 +1,6 @@
 const { loadConfigFromFile, mergeConfig } = require('vite');
-const path = require('path')
+const path = require('path');
+const preprocess = require('svelte-preprocess');
 
 const config = {
   stories: [
@@ -15,6 +16,9 @@ const config = {
   framework: '@storybook/svelte',
   core: {
     builder: '@storybook/builder-vite'
+  },
+  svelteOptions: {
+    preprocess: [preprocess({ postcss: true })]
   },
   features: {
     // On-demand store does not work for .svelte stories, only CSF.
@@ -32,17 +36,27 @@ const config = {
     // return the customized config
     return mergeConfig(config, {
       ...userConfig,
-      // customize the Vite config here
       resolve: {
         alias: {
           $lib: path.resolve(__dirname, '../src/lib'),
-          //  when using typesafe-i18n
           $i18n: path.resolve(__dirname, '../src/i18n'),
           $app: path.resolve(__dirname, './sveltekit-mocks/app/')
         }
+      },
+      server: {
+        hmr: process.env.GITPOD_WORKSPACE_URL
+          ? {
+            host: process.env.GITPOD_WORKSPACE_URL.replace(
+              'https://',
+              '6006-'
+            ),
+            protocol: 'wss',
+            clientPort: 443
+          }
+          : true
       }
     });
   }
 };
 
-module.exports = config; 
+module.exports = config;
